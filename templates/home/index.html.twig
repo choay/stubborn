@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Produits{% endblock %}
+
+{% block body %}
+
+    {% include 'partials/navbar.html.twig' %}
+
+    <div class="row">
+        {% for produit in produits %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ asset('/images/products/'~produit.image) }}" class="card-img-top" alt="{{ produit.nom }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produit.nom }}</h5>
+                        <p class="card-text">{{ produit.prix|number_format(2, '.', ',') }} €</p>
+                        <a href="{{ path('show', {'id': produit.id}) }}" class="btn btn-primary">Voir le produit</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

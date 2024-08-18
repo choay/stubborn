@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des produits{% endblock %}
+
+{% block body %}
+    {% include 'partials/navbar.html.twig' %}
+    <div class="container">
+        <a href="{{ path('admin.produits.create') }}" class="btn btn-primary">Ajouter un produit</a>
+
+        {% for flashMessage in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% if produits|length > 0 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Stocks</th> <!-- Added column for stocks -->
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td>
+                                <img src="{{ asset('images/products/' ~ produit.image) }}" alt="{{ produit.nom }}">
+
+
+                        </td>
+                        <td>{{ produit.nom }}</td>
+                        <td>{{ produit.prix | number_format(2, ',', ' ') }} €</td>
+                        <td>
+                            {% for stock in produit.stocks %}
+                                {{ stock.taille.nom }}: {{ stock.quantity }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{{ path('admin.produits.edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+
+                            <form action="{{ path('admin.produits.delete', {'id': produit.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.id) }}">
+                                <button class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucun produit trouvé.</p>
+        {% endif %}
+    </div>
+{% endblock %}

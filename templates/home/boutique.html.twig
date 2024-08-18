@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+
+{% block body %}
+
+    {% include 'partials/navbar.html.twig' %}
+    <div class="container">
+        <div class="grid">
+        {{ form_start(form) }}
+            {{ form_row(form) }}
+        <button type="submit">Filtrer</button>
+        {{ form_end(form) }}
+
+
+            {% for produit in produits %}
+                {% include 'home/_card.html.twig' with {'produit': produit} %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

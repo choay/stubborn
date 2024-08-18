@@ -1,13 +1,14 @@
-# see https://symfony.com/doc/current/reference/configuration/framework.html
+# config/packages/framework.yaml
 framework:
     secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
+    session:
+        handler_id: session.handler.native_file
+        cookie_secure: auto
+        cookie_samesite: lax
 
-    # Note that the session will be started ONLY if you read or write from it.
-    session: true
-
-    #esi: true
-    #fragments: true
+    # Uncomment these lines if you want to enable ESI and fragments
+    # esi: true
+    # fragments: true
 
 when@test:
     framework:

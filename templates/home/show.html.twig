@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du produit{% endblock %}
+
+{% block body %}
+    {% include 'partials/navbar.html.twig' %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" src="{{ asset('/images/products/' ~ produit.image) }}" alt="photo du produit">
+                </div>
+                <div class="col-md-6">
+                    <h1 class="display-5 fw-bolder">{{ produit.nom }}</h1>
+                    <div class="fs-5 mb-5">
+                        <span class="text-primary">{{ produit.prix|number_format(2, '.', ',') }} €</span>
+                    </div>
+                    <form method="post" action="{{ path('cart_add', {'id': produit.id}) }}">
+                        <label for="quantity">Quantité :</label>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1" class="form-control mb-3" required>
+
+                        {% if produit.stocks|length > 0 %}
+                            <label for="taille">Taille :</label>
+                            <select id="taille" name="taille" class="form-control mb-3" required>
+                                <option value="">Sélectionner une taille</option>
+                                {% for stock in produit.stocks %}
+                                    <option value="{{ stock.taille.id }}">{{ stock.taille.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <p class="text-danger">Aucune taille disponible pour ce produit.</p>
+                        {% endif %}
+
+                        <button type="submit" class="btn btn-outline-dark flex-shrink-0">
+                            Ajouter au panier
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Produit{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Ajouter un Produit</h1>
+
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prix) }}
+        {{ form_row(form.imageFile) }}
+
+        {# Render stock fields #}
+        {{ form_row(form.stockXS) }}
+        {{ form_row(form.stockS) }}
+        {{ form_row(form.stockM) }}
+        {{ form_row(form.stockL) }}
+        {{ form_row(form.stockXL) }}
+
+        <button class="btn btn-success">Enregistrer</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('admin.produits.index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+    </div>
+{% endblock %}

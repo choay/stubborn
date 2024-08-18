@@ -1,0 +1,8 @@
+<div class="card m-2">
+    <img class="card-img-top" src="{{asset('/images/products/'~produit.image) }}" alt="image du produit">
+    <div class="card-body">
+        <h5 class="card-title">{{ produit.nom }}</h5>
+        <p class="card-text text-primary">{{ produit.prix | number_format(2, ',', '') }}€</p>
+        <a href="{{ path('show', {'id': produit.id}) }}">Voir le produit</a>
+    </div>
+</div>
