@@ -3,6 +3,6 @@
     <div class="card-body">
         <h5 class="card-title">{{ produit.nom }}</h5>
         <p class="card-text text-primary">{{ produit.prix | number_format(2, ',', '') }}€</p>
-        <a href="{{ path('show', {'id': produit.id}) }}">Voir le produit</a>
+        <a href="{{ path('show', {'id': produit.id}) }}" class="btn btn-primary btn-sm">Voir</a>
     </div>
 </div>

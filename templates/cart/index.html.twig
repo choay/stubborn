@@ -45,8 +45,12 @@
                 </tfoot>
             </table>
             <div class="text-right">
-                <a href="" class="btn btn-success">Commander</a>
+                <a href="{{ path('create_checkout_session') }}" class="btn btn-success">Commander</a>
+
+
+                <a href="{{ path('boutique') }}" class="btn btn-warning">Contenuer vos achats</a>
             </div>
+
         {% endif %}
     </div>
 {% endblock %}

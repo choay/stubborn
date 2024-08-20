@@ -1,0 +1,4 @@
+# config/packages/doctrine_fixtures.yaml
+doctrine_fixtures:
+  fixtures:
+    - App\DataFixtures\AppFixtures

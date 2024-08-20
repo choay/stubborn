@@ -114,4 +114,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function setApiToken(string $string)
+    {
+    }
 }

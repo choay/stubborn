@@ -20,7 +20,7 @@
                     <th>Image</th>
                     <th>Nom</th>
                     <th>Prix</th>
-                    <th>Stocks</th> <!-- Added column for stocks -->
+                    <th>Stocks</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -36,17 +36,21 @@
                         <td>{{ produit.prix | number_format(2, ',', ' ') }} €</td>
                         <td>
                             {% for stock in produit.stocks %}
-                                {{ stock.taille.nom }}: {{ stock.quantity }}<br>
+                                stock {{ stock.taille.nom }}: {{ stock.quantity }}
                             {% endfor %}
                         </td>
                         <td>
-                            <a href="{{ path('admin.produits.edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
 
-                            <form action="{{ path('admin.produits.delete', {'id': produit.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.id) }}">
-                                <button class="btn btn-danger btn-sm">Supprimer</button>
-                            </form>
+                            <div class="text-right">
+                                <a href="{{ path('admin.produits.edit', {'id': produit.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+
+                                <form action="{{ path('admin.produits.delete', {'id': produit.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.id) }}">
+                                    <button class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </div>
                         </td>
+
                     </tr>
                 {% endfor %}
                 </tbody>

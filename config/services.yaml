@@ -1,24 +1,35 @@
-# config/services.yaml
 services:
   _defaults:
-    autowire: true
-    autoconfigure: true
-    public: false
+    autowire: true        # Automatically injects dependencies into your services
+    autoconfigure: true   # Automatically registers your services as commands, event subscribers, etc.
+    public: false         # Services are private by default
 
+  # Configuration des fixtures
+  # Aucune configuration spécifique nécessaire pour Doctrine\Bundle\FixturesBundle\Fixture
+  # Les fixtures doivent être auto-configurées et auto-injectées
+
+  # Services spécifiques
   App\Service\Cart:
     arguments:
       $requestStack: '@request_stack'
       $produitRepository: '@App\Repository\ProduitRepository'
 
+  App\Service\StripeService:
+    arguments:
+      $stripeSecretKey: '%env(STRIPE_SECRET_KEY)%'
+
+  # Contrôleurs
   App\Controller\:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
     public: true
 
+  # Répertoires
   App\Repository\:
     resource: '../src/Repository'
     public: false
 
+  # Services de sécurité
   App\Security\Authenticator:
     autowire: true
     autoconfigure: true
@@ -27,6 +38,12 @@ services:
     autowire: true
     autoconfigure: true
 
+  # Configuration pour RegistrationController
   App\Controller\RegistrationController:
     arguments:
       $emailVerifier: '@App\Security\EmailVerifier'
+
+  # Général pour le namespace App
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,Tests,Kernel.php}'

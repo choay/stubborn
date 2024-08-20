@@ -37,7 +37,6 @@ class CartController extends AbstractController
     {
         $quantity = (int) $request->request->get('quantity', 1);
 
-        // Assurez-vous que le produit existe
         $produit = $this->produitRepository->find($id);
         if (!$produit) {
             throw $this->createNotFoundException('Produit non trouvé');

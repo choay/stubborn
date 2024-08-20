@@ -6,6 +6,9 @@
 
     {% include 'partials/navbar.html.twig' %}
 
+    <div class="container">
+        <h1>Stubborn</h1>
+        <p>Bienvenue chez Stubborn, votre destination incontournable pour des sweats de qualité supérieure, alliant style, confort et durabilité. Basée au cœur de Londres, à Piccadilly Circus, notre marque incarne l'esprit urbain et la mode audacieuse.</p>
     <div class="row">
         {% for produit in produits %}
             <div class="col-md-4">
@@ -14,10 +17,11 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ produit.nom }}</h5>
                         <p class="card-text">{{ produit.prix|number_format(2, '.', ',') }} €</p>
-                        <a href="{{ path('show', {'id': produit.id}) }}" class="btn btn-primary">Voir le produit</a>
+                        <a href="{{ path('show', {'id': produit.id}) }}" class="btn btn-primary">Voir</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
+    </div>
     </div>
 {% endblock %}
